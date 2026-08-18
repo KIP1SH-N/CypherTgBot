@@ -4,6 +4,8 @@ import requests
 import hashlib
 from flask import Flask, request
 import os
+import logging
+telebot.logger.setLevel(logging.DEBUG)
 
 bot = telebot.TeleBot(os.environ['BOT_TOKEN'])
 app = Flask(__name__)
@@ -43,6 +45,7 @@ def test(message):
 @app.route('/webhook', methods=['POST'])
 def webhook():
     json_data = request.get_json()
+    print("RAW UPDATE:", json_data)
     update = telebot.types.Update.de_json(json_data)
     bot.process_new_updates([update])
     return '', 200  
