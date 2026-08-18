@@ -3,8 +3,9 @@ from zxcvbn import zxcvbn
 import requests
 import hashlib
 from flask import Flask, request
+import os
 
-bot = telebot.TeleBot('BOT_TOKEN')
+bot = telebot.TeleBot(os.environ['BOT_TOKEN'])
 app = Flask(__name__)
 
 @bot.message_handler(commands=['start', 'help'])
